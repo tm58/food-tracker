@@ -225,9 +225,6 @@ p2.appendChild(formatPersonData(data["Person 2"]));
 async function deleteEntry(id) {
 await fetch(API_URL, {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
   body: JSON.stringify({
     action: "delete",
     id: id
@@ -239,15 +236,12 @@ await fetch(API_URL, {
 
 async function editEntry(id, newFood) {
   await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      action: "edit",
-      id: id,
-      food: newFood
-    })
-  });
+  method: "POST",
+  body: JSON.stringify({
+    action: "edit",
+    id: id,
+    food: newFood
+  })
+});
   loadHistory();
 }
