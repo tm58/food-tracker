@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", loadToday);
 
-const API_URL = "https://script.google.com/macros/s/AKfycbw3uwEH_oDzqepOpw5DjPweTEY3pDSa5qe3vgj8j3UnIYtNRP-GJemAJCzJw7Devn9b/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxvpvbBIEz9N3NuZZsceh338EqSDLF5SEDaMOumL4WjGhX5WsA1-1boD3PKMfUfzdQD/exec";
 
 
 async function addEntry(person, mealId, foodId) {
@@ -58,7 +58,10 @@ async function loadHistory() {
         grouped[date][entry.Person][entry.Meal] = [];
       }
 
-       grouped[date][entry.Person][entry.Meal].push(entry.Food);
+       grouped[date][entry.Person][entry.Meal].push({
+  id: entry.ID,
+  food: entry.Food
+});
     });
 
     // Step 2: Render
@@ -100,9 +103,14 @@ function formatPersonData(personData) {
 
   Object.keys(personData).forEach(meal => {
     html += `<strong>${meal}</strong><br>`;
-    personData[meal].forEach(food => {
-      html += `- ${food}<br>`;
-    });
+    personData[meal].forEach(entry => {
+        html += `
+    <div>
+      - ${entry.food}
+      <button onclick="deleteEntry('${entry.id}')">❌</button>
+    </div>
+  `;
+});
     html += "<br>";
   });
 
@@ -170,4 +178,19 @@ function renderToday(data, date) {
   container.appendChild(row);
 
   list.appendChild(container);
+}
+
+async function deleteEntry(id) {
+  await fetch(API_URL + "?id=" + id, {
+    method: "DELETE"
+  });
+
+  loadHistory(); // refresh
+}
+
+async function editEntry(id, newFood) {
+  await fetch(API_URL, {
+    method: "PUT",
+    body: JSON.stringify({ id, food: newFood })
+  });
 }
