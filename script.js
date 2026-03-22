@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", loadToday);
 
-const API_URL = "https://script.google.com/macros/s/AKfycby61yqgzMhYJ3oWDV4TX2thTgh_QUgTLoJ7bTj9WVyL_tu5ney40qRJdVjLBmpcQHAU/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbw3uwEH_oDzqepOpw5DjPweTEY3pDSa5qe3vgj8j3UnIYtNRP-GJemAJCzJw7Devn9b/exec";
 
 
 async function addEntry(person, mealId, foodId) {
