@@ -112,39 +112,58 @@ function formatPersonData(personData) {
     return container;
   }
 
-  meals.forEach(meal => {
-    const mealTitle = document.createElement("strong");
-    mealTitle.textContent = meal;
-    container.appendChild(mealTitle);
-    container.appendChild(document.createElement("br"));
+ personData[meal].forEach(entry => {
+  const row = document.createElement("div");
+  row.className = "entry-row";
 
-    personData[meal].forEach(entry => {
-      const row = document.createElement("div");
-row.className = "entry-row";
+  // TEXT (default view)
+  const text = document.createElement("div");
+  text.className = "entry-text";
+  text.textContent = entry.food;
 
-// Input
-const input = document.createElement("input");
-input.className = "entry-input";
-input.value = entry.food;
+  // DELETE BUTTON
+  const btn = document.createElement("button");
+  btn.className = "delete-btn";
+  btn.textContent = "🗑️";
 
-input.addEventListener("blur", () => {
-  editEntry(entry.id, input.value);
-});
+  btn.addEventListener("click", () => {
+    deleteEntry(entry.id);
+  });
 
-// Delete button
-const btn = document.createElement("button");
-btn.className = "delete-btn";
-btn.textContent = "🗑️";
+  // 👉 TAP TO EDIT
+  text.addEventListener("click", () => {
+    const input = document.createElement("input");
+    input.className = "entry-input";
+    input.value = entry.food;
 
-btn.addEventListener("click", () => {
-  deleteEntry(entry.id);
-});
+    row.replaceChild(input, text);
+    input.focus();
 
-row.appendChild(input);
-row.appendChild(btn);
+    // Save on blur
+    input.addEventListener("blur", () => {
+      const newValue = input.value.trim();
 
-container.appendChild(row);
+      if (newValue && newValue !== entry.food) {
+        editEntry(entry.id, newValue);
+        text.textContent = newValue;
+      }
+
+      row.replaceChild(text, input);
     });
+
+    // Save on Enter
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        input.blur();
+      }
+    });
+  });
+
+  row.appendChild(text);
+  row.appendChild(btn);
+
+  container.appendChild(row);
+});
 
     container.appendChild(document.createElement("br"));
   });
