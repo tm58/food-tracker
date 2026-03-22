@@ -120,27 +120,30 @@ function formatPersonData(personData) {
 
     personData[meal].forEach(entry => {
       const row = document.createElement("div");
+row.className = "entry-row";
 
-      // Input
-      const input = document.createElement("input");
-      input.value = entry.food;
+// Input
+const input = document.createElement("input");
+input.className = "entry-input";
+input.value = entry.food;
 
-      input.addEventListener("blur", () => {
-        editEntry(entry.id, input.value);
-      });
+input.addEventListener("blur", () => {
+  editEntry(entry.id, input.value);
+});
 
-      // Delete button
-      const btn = document.createElement("button");
-      btn.textContent = "❌";
+// Delete button
+const btn = document.createElement("button");
+btn.className = "delete-btn";
+btn.textContent = "🗑️";
 
-      btn.addEventListener("click", () => {
-        deleteEntry(entry.id);
-      });
+btn.addEventListener("click", () => {
+  deleteEntry(entry.id);
+});
 
-      row.appendChild(input);
-      row.appendChild(btn);
+row.appendChild(input);
+row.appendChild(btn);
 
-      container.appendChild(row);
+container.appendChild(row);
     });
 
     container.appendChild(document.createElement("br"));
