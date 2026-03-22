@@ -54,9 +54,11 @@ async function loadHistory() {
         };
       }
 
-      grouped[date][entry.Person].push(
-        `${entry.Meal}: ${entry.Food}`
-      );
+      if (!grouped[date][entry.Person][entry.Meal]) {
+        grouped[date][entry.Person][entry.Meal] = [];
+      }
+
+       grouped[date][entry.Person][entry.Meal].push(entry.Food);
     });
 
     // Step 2: Render
