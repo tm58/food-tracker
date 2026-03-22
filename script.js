@@ -36,6 +36,7 @@ async function loadHistory() {
     const res = await fetch(API_URL);
     const data = await res.json();
     console.log("Data fetched");
+    console.log(data);
 
     const list = document.getElementById("list");
     list.innerHTML = "";
