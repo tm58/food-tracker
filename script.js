@@ -156,20 +156,30 @@ async function loadToday() {
 
     const today = new Date().toDateString();
 
-    const todayData = {
-      "Person 1": [],
-      "Person 2": []
-    };
+const todayData = {
+  "Person 1": {},
+  "Person 2": {}
+};
 
-    data.forEach(entry => {
-      const entryDate = new Date(entry.Date).toDateString();
+data.forEach(entry => {
+  const entryDate = new Date(entry.Date).toDateString();
+  const today = new Date().toDateString();
 
-      if (entryDate === today) {
-        todayData[entry.Person].push(
-          `${entry.Meal}: ${entry.Food}`
-        );
-      }
+  if (entryDate === today) {
+    const person = entry.Person;
+    const meal = entry.Meal;
+    const food = entry.Food;
+
+    if (!todayData[person][meal]) {
+      todayData[person][meal] = [];
+    }
+
+    todayData[person][meal].push({
+      id: entry.ID,
+      food: food
     });
+  }
+});
 
     renderToday(todayData, today);
 
@@ -197,11 +207,11 @@ function renderToday(data, date) {
   const p2 = document.createElement("div");
   p2.className = "column";
 
-  p1.innerHTML = `<h4>Person 1</h4>` +
-    (data["Person 1"].join("<br>") || "No entries");
+p1.innerHTML = `<h4>Person 1</h4>`;
+p1.appendChild(formatPersonData(data["Person 1"]));
 
-  p2.innerHTML = `<h4>Person 2</h4>` +
-    (data["Person 2"].join("<br>") || "No entries");
+p2.innerHTML = `<h4>Person 2</h4>`;
+p2.appendChild(formatPersonData(data["Person 2"]));
 
   row.appendChild(p1);
   row.appendChild(p2);
