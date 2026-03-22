@@ -113,3 +113,25 @@ strong {
   margin-bottom: 4px;
   color: #333;
 }
+
+.entry-text {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 16px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.entry-text:active {
+  background: #ececec;
+}
+
+.entry-text::after {
+  content: " ✏️";
+  font-size: 12px;
+  opacity: 0.3;
+}
