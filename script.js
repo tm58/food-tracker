@@ -45,7 +45,7 @@ async function loadHistory() {
     const grouped = {};
 
     data.forEach(entry => {
-      const date = new Date(entry.Date).toDateString();
+      const date = new Date(entry.Date).toLocaleDateString();
 
       if (!grouped[date]) {
         grouped[date] = {
