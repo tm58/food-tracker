@@ -104,9 +104,12 @@ function formatPersonData(personData) {
   Object.keys(personData).forEach(meal => {
     html += `<strong>${meal}</strong><br>`;
     personData[meal].forEach(entry => {
-        html += `
+  html += `
     <div>
-      - ${entry.food}
+      <input 
+        value="${entry.food}" 
+        onchange="editEntry('${entry.id}', this.value)"
+      />
       <button onclick="deleteEntry('${entry.id}')">❌</button>
     </div>
   `;
