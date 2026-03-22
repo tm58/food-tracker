@@ -1,7 +1,7 @@
 const form = document.getElementById("foodForm");
 const list = document.getElementById("list");
 
-const API_URL = "TBD_WEB_APP_URL";
+const API_URL = "https://script.google.com/macros/s/AKfycby61yqgzMhYJ3oWDV4TX2thTgh_QUgTLoJ7bTj9WVyL_tu5ney40qRJdVjLBmpcQHAU/exec";
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
