@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Log</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Daily Food Log</h2>
+
+<form id="foodForm">
+  <select id="person">
+    <option>Person 1</option>
+    <option>Person 2</option>
+  </select>
+
+  <select id="meal">
+    <option>Breakfast</option>
+    <option>Lunch</option>
+    <option>Dinner</option>
+    <option>Snack</option>
+  </select>
+
+  <input type="text" id="food" placeholder="What did they eat?" required>
+
+  <button type="submit">Add</button>
+</form>
+
+<h3>Entries</h3>
+<ul id="list"></ul>
+
+<script src="script.js"></script>
+
+</body>
+</html>
