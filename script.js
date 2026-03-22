@@ -99,25 +99,50 @@ async function loadHistory() {
 }
 
 function formatPersonData(personData) {
-  let html = "";
+  const container = document.createElement("div");
 
-  Object.keys(personData).forEach(meal => {
-    html += `<strong>${meal}</strong><br>`;
+  const meals = Object.keys(personData);
+
+  if (meals.length === 0) {
+    container.textContent = "No entries";
+    return container;
+  }
+
+  meals.forEach(meal => {
+    const mealTitle = document.createElement("strong");
+    mealTitle.textContent = meal;
+    container.appendChild(mealTitle);
+    container.appendChild(document.createElement("br"));
+
     personData[meal].forEach(entry => {
-  html += `
-    <div>
-      <input 
-        value="${entry.food}" 
-        onchange="editEntry('${entry.id}', this.value)"
-      />
-      <button onclick="deleteEntry('${entry.id}')">❌</button>
-    </div>
-  `;
-});
-    html += "<br>";
+      const row = document.createElement("div");
+
+      // Input
+      const input = document.createElement("input");
+      input.value = entry.food;
+
+      input.addEventListener("blur", () => {
+        editEntry(entry.id, input.value);
+      });
+
+      // Delete button
+      const btn = document.createElement("button");
+      btn.textContent = "❌";
+
+      btn.addEventListener("click", () => {
+        deleteEntry(entry.id);
+      });
+
+      row.appendChild(input);
+      row.appendChild(btn);
+
+      container.appendChild(row);
+    });
+
+    container.appendChild(document.createElement("br"));
   });
 
-  return html || "No entries";
+  return container;
 }
 
 async function loadToday() {
