@@ -26,12 +26,16 @@ function addToList(person, meal, food) {
   list.appendChild(li);
 }
 
-document.getElementById("loadHistory").addEventListener("click", loadHistory);
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("loadHistory").addEventListener("click", loadHistory);
+});
 
 async function loadHistory() {
+  console.log("History buttong clicked");
   try {
     const res = await fetch(API_URL);
     const data = await res.json();
+    console.log("Data fetched");
 
     const list = document.getElementById("list");
     list.innerHTML = "";
