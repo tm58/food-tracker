@@ -63,13 +63,13 @@ hr {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 10px 0;
 }
 
 /* ✅ FIXED INPUT (main improvement) */
 .entry-input {
-  flex: 1;
+  flex: 1;                 /* 🔥 MOST IMPORTANT */
   width: 100%;
+  min-width: 0;            /* 🔥 prevents shrink bug */
   padding: 10px 12px;
   font-size: 16px;
   min-height: 42px;
