@@ -1,14 +1,14 @@
-const form = document.getElementById("foodForm");
-const list = document.getElementById("list");
+
 
 const API_URL = "https://script.google.com/macros/s/AKfycby61yqgzMhYJ3oWDV4TX2thTgh_QUgTLoJ7bTj9WVyL_tu5ney40qRJdVjLBmpcQHAU/exec";
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
 
-  const person = document.getElementById("person").value;
-  const meal = document.getElementById("meal").value;
-  const food = document.getElementById("food").value;
+async function addEntry(person, mealId, foodId) {
+  const meal = document.getElementById(mealId).value;
+  const foodInput = document.getElementById(foodId);
+  const food = foodInput.value;
+
+  if (!food) return;
 
   await fetch(API_URL, {
     method: "POST",
@@ -16,10 +16,11 @@ form.addEventListener("submit", async (e) => {
   });
 
   addToList(person, meal, food);
-  form.reset();
-});
+  foodInput.value = "";
+}
 
 function addToList(person, meal, food) {
+  const list = document.getElementById("list");
   const li = document.createElement("li");
   li.textContent = `${person} - ${meal}: ${food}`;
   list.appendChild(li);
