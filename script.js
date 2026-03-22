@@ -49,8 +49,8 @@ async function loadHistory() {
 
       if (!grouped[date]) {
         grouped[date] = {
-          "Person 1": [],
-          "Person 2": []
+          "Person 1": {},
+          "Person 2": {}
         };
       }
 
