@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", loadToday);
+document.addEventListener("DOMContentLoaded", () => {
+  loadToday();
+  document.getElementById("loadHistory").addEventListener("click", loadHistory);
+});
 
 const API_URL = "https://script.google.com/macros/s/AKfycbxvpvbBIEz9N3NuZZsceh338EqSDLF5SEDaMOumL4WjGhX5WsA1-1boD3PKMfUfzdQD/exec";
 
@@ -25,10 +28,6 @@ function addToList(person, meal, food) {
   li.textContent = `${person} - ${meal}: ${food}`;
   list.appendChild(li);
 }
-
-window.onload = () => {
-  document.getElementById("loadHistory").addEventListener("click", loadHistory);
-};
 
 async function loadHistory() {
   console.log("History buttong clicked");
@@ -78,11 +77,11 @@ async function loadHistory() {
       const p1 = document.createElement("div");
       const p2 = document.createElement("div");
 
-      p1.innerHTML = `<strong>Person 1</strong><br>` +
-        formatPersonData(grouped[date]["Person 1"]);
+      p1.innerHTML = `<strong>Person 1</strong><br>`;
+      p1.appendChild(formatPersonData(grouped[date]["Person 1"]));
 
-      p2.innerHTML = `<strong>Person 2</strong><br>` +
-        formatPersonData(grouped[date]["Person 1"]);
+      p2.innerHTML = `<strong>Person 2</strong><br>`;
+      p2.appendChild(formatPersonData(grouped[date]["Person 2"]));
 
       row.appendChild(p1);
       row.appendChild(p2);
@@ -235,6 +234,5 @@ async function editEntry(id, newFood) {
       food: newFood
     })
   });
-}
   loadHistory();
 }
