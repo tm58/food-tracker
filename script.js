@@ -76,10 +76,10 @@ async function loadHistory() {
       const p2 = document.createElement("div");
 
       p1.innerHTML = `<strong>Person 1</strong><br>` +
-        grouped[date]["Person 1"].join("<br>");
+        formatPersonData(grouped[date]["Person 1"]);
 
       p2.innerHTML = `<strong>Person 2</strong><br>` +
-        grouped[date]["Person 2"].join("<br>");
+        formatPersonData(grouped[date]["Person 1"]);
 
       row.appendChild(p1);
       row.appendChild(p2);
@@ -93,6 +93,20 @@ async function loadHistory() {
   } catch (err) {
     console.error("Error loading history:", err);
   }
+}
+
+function formatPersonData(personData) {
+  let html = "";
+
+  Object.keys(personData).forEach(meal => {
+    html += `<strong>${meal}</strong><br>`;
+    personData[meal].forEach(food => {
+      html += `- ${food}<br>`;
+    });
+    html += "<br>";
+  });
+
+  return html || "No entries";
 }
 
 async function loadToday() {
