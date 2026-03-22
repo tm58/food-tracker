@@ -26,9 +26,9 @@ function addToList(person, meal, food) {
   list.appendChild(li);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = () => {
   document.getElementById("loadHistory").addEventListener("click", loadHistory);
-});
+};
 
 async function loadHistory() {
   console.log("History buttong clicked");
