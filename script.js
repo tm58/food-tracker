@@ -44,24 +44,29 @@ async function loadHistory() {
     const grouped = {};
 
     data.forEach(entry => {
-      const date = new Date(entry.Date).toLocaleDateString();
+  const date = new Date(entry.Date).toLocaleDateString();
 
-      if (!grouped[date]) {
-        grouped[date] = {
-          "Person 1": {},
-          "Person 2": {}
-        };
-      }
+  // 🔥 handle both Meal / meal
+  const meal = entry.Meal || entry.meal;
+  const person = entry.Person || entry.person;
+  const food = entry.Food || entry.food;
 
-      if (!grouped[date][entry.Person][entry.Meal]) {
-        grouped[date][entry.Person][entry.Meal] = [];
-      }
+  if (!grouped[date]) {
+    grouped[date] = {
+      "Person 1": {},
+      "Person 2": {}
+    };
+  }
 
-       grouped[date][entry.Person][entry.Meal].push({
-  id: entry.ID,
-  food: entry.Food
+  if (!grouped[date][person][meal]) {
+    grouped[date][person][meal] = [];
+  }
+
+  grouped[date][person][meal].push({
+    id: entry.ID,
+    food: food
+  });
 });
-    });
 
     // Step 2: Render
     Object.keys(grouped).reverse().forEach(date => {
