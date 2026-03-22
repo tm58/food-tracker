@@ -184,16 +184,32 @@ function renderToday(data, date) {
 }
 
 async function deleteEntry(id) {
-  await fetch(API_URL + "?id=" + id, {
-    method: "DELETE"
-  });
+await fetch(API_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    action: "delete",
+    id: id
+  })
+});
 
   loadHistory(); // refresh
 }
 
 async function editEntry(id, newFood) {
   await fetch(API_URL, {
-    method: "PUT",
-    body: JSON.stringify({ id, food: newFood })
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      action: "edit",
+      id: id,
+      food: newFood
+    })
   });
+}
+  loadHistory();
 }
