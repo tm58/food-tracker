@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Food Log</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
 <h2>Daily Food Log</h2>
 
-<form id="foodForm">
-  <select id="person">
-    <option>Person 1</option>
-    <option>Person 2</option>
-  </select>
+<!-- Person 1 -->
+<h3>Person 1</h3>
+<select id="meal1">
+  <option>Breakfast</option>
+  <option>Lunch</option>
+  <option>Dinner</option>
+  <option>Snack</option>
+</select>
 
-  <select id="meal">
-    <option>Breakfast</option>
-    <option>Lunch</option>
-    <option>Dinner</option>
-    <option>Snack</option>
-  </select>
+<input type="text" id="food1" placeholder="What did they eat?">
+<button onclick="addEntry('Person 1', 'meal1', 'food1')">Add</button>
 
-  <input type="text" id="food" placeholder="What did they eat?" required>
+<hr>
 
-  <button type="submit">Add</button>
-</form>
+<!-- Person 2 -->
+<h3>Person 2</h3>
+<select id="meal2">
+  <option>Breakfast</option>
+  <option>Lunch</option>
+  <option>Dinner</option>
+  <option>Snack</option>
+</select>
+
+<input type="text" id="food2" placeholder="What did they eat?">
+<button onclick="addEntry('Person 2', 'meal2', 'food2')">Add</button>
 
 <h3>Entries</h3>
 <ul id="list"></ul>
-
-<script src="script.js"></script>
-
-</body>
-</html>
